@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import star from '../../../assets/images/star.png'
 import LazyImage from "../../LazyImage/LazyImage";
 import {Link} from "react-router-dom";
@@ -26,8 +26,20 @@ const FilmCard: React.FC<FilmCardProps> = ({src, title, lang, rating, year, film
         setShowInfo(false)
     }
 
+    const onFocus = () => {
+        setShowInfo(true)
+    }
+
+    let filmLinkRef = useRef(null)
+
+    const onBlur = () => {
+        if (document.activeElement !== filmLinkRef.current) {
+            setShowInfo(false)
+        }
+    }
+
     return (
-        <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} className="film-card">
+        <div tabIndex={0} onClick={() => console.log('gfdg')} onFocus={onFocus} onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} className="film-card">
             <div className="film-card__main">
                 <LazyImage src={'https://image.tmdb.org/t/p/w500' + src} alt={title}/>
                 <div className={"films-card__info" + (showInfo ? ' show' : '')}>
@@ -36,7 +48,7 @@ const FilmCard: React.FC<FilmCardProps> = ({src, title, lang, rating, year, film
                         <span className="rating">{rating}</span>
                     </div>
                     <span className="film-card__lang">{genres.filter(g => g ? g : false).join(', ')}</span>
-                    <Link to={`/films/${currentPage}/${filmId}`} className="film-card__button">More</Link>
+                    <Link onBlur={onBlur} ref={filmLinkRef} tabIndex={0} to={`/films/${currentPage}/${filmId}`} className="film-card__button">More</Link>
                 </div>
             </div>
             <div className="film-card__footer">
