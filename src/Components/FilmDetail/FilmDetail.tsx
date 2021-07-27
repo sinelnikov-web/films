@@ -33,7 +33,7 @@ const FilmDetail = () => {
 
     return (
         <div>
-            <Header>
+            <Header title={film[0].title}>
                 <nav className="nav">
                     <Link to={'/films'} className="back-button">
                         <img src={backImg} alt=""/>
