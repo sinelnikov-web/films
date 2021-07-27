@@ -29,7 +29,7 @@ const FilmCard: React.FC<FilmCardProps> = ({src, title, lang, rating, year, film
     return (
         <div onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} className="film-card">
             <div className="film-card__main">
-                <LazyImage src={'https://image.tmdb.org/t/p/original' + src} alt={title}/>
+                <LazyImage src={'https://image.tmdb.org/t/p/w500' + src} alt={title}/>
                 <div className={"films-card__info" + (showInfo ? ' show' : '')}>
                     <div className="film-card__rating">
                         <img className="star" src={star} alt=""/>

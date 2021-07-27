@@ -50,7 +50,7 @@ const FilmDetail = () => {
                                 <img className="star" src={starImg} alt=""/>
                                 <span className="rating">{film[0].vote_average}</span>
                             </div>
-                            <LazyImage src={'https://image.tmdb.org/t/p/original' + film[0].poster_path} alt=""/>
+                            <LazyImage src={'https://image.tmdb.org/t/p/w500' + film[0].poster_path} alt=""/>
                         </div>
                         <div className="film__main">
                             <h1 className="film__title">{film[0].title}</h1>
