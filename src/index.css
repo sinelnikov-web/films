@@ -381,6 +381,15 @@ body {
     .pagination__item {
         padding: 5px 15px;
     }
+    .film__image {
+        width: 100%;
+    }
+    .film__title {
+        font-size: 30px;
+    }
+    .film__genres-list {
+        flex-direction: column;
+    }
 }
 
 @media (max-width: 1200px) {
