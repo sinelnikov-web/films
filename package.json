@@ -2,7 +2,7 @@
   "name": "films",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sinelnikov-web.github.io/movies",
+  "homepage": "https://sinelnikov-web.github.io/films",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
