@@ -34,7 +34,7 @@ const initialState = {
     total_pages: 500 as null | number,
     page: null as null | number,
     results: [] as Array<MovieType>,
-    isFetching: false,
+    isFetching: 0,
     genres: [] as Array<GenreType>
 }
 
@@ -47,10 +47,10 @@ export const filmListReducer = (state = initialState, action: ActionsTypes): Ini
             return {...state, ...payload, genres: [...state.genres]}
         }
         case START_FETCHING: {
-            return {...state, isFetching: true}
+            return {...state, isFetching: state.isFetching + 1}
         }
         case STOP_FETCHING: {
-            return {...state, isFetching: false}
+            return {...state, isFetching: state.isFetching - 1}
         }
         case GET_GENRES_SUCCESS: {
             if (payload !== null) {
@@ -105,7 +105,11 @@ export const getFilms = (pageNumber: number) => async (dispatch: Dispatch) => {
 
 export const getGenres = () => async (dispatch: Dispatch) => {
     dispatch(actions.startFetching())
-    const response = await filmListAPI.getGenres()
-    dispatch(actions.getGenresSuccess(response.genres))
+    if (!localStorage.getItem('genres_list')) {
+        const response = await filmListAPI.getGenres()
+        localStorage.setItem('genres_list', JSON.stringify(response.genres))
+    }
+    let genres = JSON.parse(localStorage.getItem('genres_list') as string)
+    dispatch(actions.getGenresSuccess(genres))
     dispatch(actions.stopFetching())
 }
